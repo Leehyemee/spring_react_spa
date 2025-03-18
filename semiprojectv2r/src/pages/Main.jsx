@@ -4,7 +4,7 @@ import React from "react";
 const Main = () => {
     return (
         <main id="content">
-            <img src="image/spyfamily.png" className="img-fluid" />
+            <img src="image/jjang.jpg" className="img-fluid"/>
         </main>
     )
 }
