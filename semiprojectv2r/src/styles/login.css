@@ -4,7 +4,7 @@
     margin: 10px;
     /*display: none;*/
 }
-#joinfrm, #loginfrm, #myinfo {
+#joinfrm {
     max-width: 450px;
     width: 100%;
     margin: 100px auto;
