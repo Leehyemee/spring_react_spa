@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles/member.css";
 
-// Join 함수 컴포넌트 정의
-const Join = () => {
+// Myinfo 함수 컴포넌트 정의
+const Myinfo = () => {
     return (
         <main id="content">
             <h2>회원정보</h2>
@@ -40,4 +40,4 @@ const Join = () => {
     )
 }
 
-export default Join;
+export default Myinfo;
