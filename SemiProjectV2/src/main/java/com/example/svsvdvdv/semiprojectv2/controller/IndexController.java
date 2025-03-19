@@ -1,4 +1,4 @@
-package com.example.zzyzzy.semiprojectv2.controller;
+package com.example.svsvdvdv.semiprojectv2.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

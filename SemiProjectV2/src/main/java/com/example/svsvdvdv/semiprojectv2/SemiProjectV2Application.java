@@ -1,4 +1,4 @@
-package com.example.zzyzzy.semiprojectv2;
+package com.example.svsvdvdv.semiprojectv2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

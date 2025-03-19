@@ -1,6 +1,5 @@
 import React, {useRef, useState} from "react";
 import "../styles/member.css";
-import {atomtest} from "globals";
 
 // 폼 재설정 함수 - 외부로 빼냄
 const resetForm = (formJoinRef, setErrors) => {
@@ -14,7 +13,7 @@ const processJoinok = async (formValues) => {
     // formValues.password = await hashPassword(formValues.password);
     // console.log(formValues.password);
 
-    fetch('htto://localhost:8080/api/auch/signup', {    // 레스트풀 형식??
+    fetch('http://localhost:8080/api/auth/signup', {    // 레스트풀 형식??
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
