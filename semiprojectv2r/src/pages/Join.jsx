@@ -1,41 +1,120 @@
-import React from "react";
+import React, {useRef, useState} from "react";
 import "../styles/member.css";
+import {atomtest} from "globals";
 
 // Join 함수 컴포넌트 정의
 const Join = () => {
+    // form 요소 참조를 위한 ref 변수 생성
+    const formJoinRef = useRef(null);
+
+    // 오류 상태를 위한 변수 선언
+    const [errors, setErrors] = useState({});
+
+    // 폼 제출시 데이터 처리 및 유효성 검사
+    const handleJoinSubmit = (e) => {
+        e.preventDefault();
+
+        // FormData API를 사용해서 폼 데이터 수집
+        const formData = new FormData(formJoinRef.current);
+        const formValues = Object.fromEntries(formData.entries());
+        
+        // 전체 폼 유효성 검사
+        const formErrors = validateJoinForm(formValues);
+
+        // 유효성 검사 후 오류가 하나라도 없다면?
+        if (Object.keys(formErrors).length === 0) {
+            console.log('입력한 회원 정보 : ', formValues);
+        } else { // 오류가 하나라도 존재한다면?
+            setErrors(formErrors);
+            console.log("'오류 정보 : '", formErrors);
+        }
+
+    };
+
+    // 전체 폼 유효성 검사 함수
+    const  validateJoinForm = (values) => {
+        let formErrors = {};
+
+        // 아이디 검사
+        if (!values.userid) {
+            formErrors.userid = "아이디를 입력하세요!!";
+        } else if (values.userid.length < 6) {
+            formErrors.userid = "아이디는 6자 이상이어야 합니다!!";
+        }
+
+        // 비밀번호 검사
+        if (!values.password) {
+            formErrors.password = "비밀번호를 입력하세요!!";
+        } else if (values.password.length < 6) {
+            formErrors.password = "비밀번호는 6자 이상이어야 합니다!!";
+        }
+
+        // 비밀번호 확인 검사
+        if (!values.repassword) {
+            formErrors.repassword = "비밀번호를 확인을 입력하세요!!";
+        } else if (values.password !== values.repassword) {
+            formErrors.repassword = "비밀번호는 6자 이상이어야 합니다!!";
+        }
+
+        // 이름 확인 검사
+        if (!values.name) {
+            formErrors.name = "이름을 입력하세요!!";
+        }
+
+        // 이메일 확인 검사
+        if (!values.email) {
+            formErrors.email = "이메일을 입력하세요!!";
+        } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+            formErrors.email = "유효한 이메일 주소를 입력하세요!!";
+        }
+
+        return formErrors;
+    };
+
     return (
         <main id="content">
             <h2>회원가입</h2>
-            <form name="joinfrm" id="joinfrm" method="post" noValidate>
+            <form name="joinfrm" id="joinfrm" method="post"
+              ref={formJoinRef} onSubmit={handleJoinSubmit} noValidate>
+
                 <div className="form-floating my-2">
-                    <input type="text" name="userid" id="userid" className="form-control"
+                    <input type="text" name="userid" id="userid"
+                           className={`form-control ${errors.userid ? 'is-invalid' : ''}`}
                            placeholder="아이디" required minLength="6" maxLength="18"/>
                     <label htmlFor="userid" className="form-label">아이디</label>
+                    {errors.userid && <div className="invalid-feedback">{errors.userid}</div>}
                 </div>
 
                 <div className="form-floating my-2">
-                    <input type="password" name="userpwd" id="userpwd" className="form-control"
+                    <input type="password" name="password" id="password"
+                           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                            placeholder="비밀번호" required minLength="6" maxLength="18"/>
-                    <label htmlFor="userpwd" className="form-label">비밀번호</label>
+                    <label htmlFor="passwd" className="form-label">비밀번호</label>
+                    {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                 </div>
 
                 <div className="form-floating my-2">
-                    <input type="password" name="reuserpwd" id="reuserpwd" className="form-control"
+                    <input type="password" name="repassword" id="repassword"
+                           className={`form-control ${errors.repassword ? 'is-invalid' : ''}`}
                            placeholder="비밀번호 확인" required minLength="6" maxLength="18"/>
-                    <label htmlFor="reuserpwd" className="form-label">비밀번호 확인</label>
+                    <label htmlFor="repasswd" className="form-label">비밀번호 확인</label>
+                    {errors.repassword && <div className="invalid-feedback">{errors.repassword}</div>}
                 </div>
 
                 <div className="form-floating my-2">
-                    <input type="text" name="name" id="name" className="form-control"
+                    <input type="text" name="name" id="name"
+                           className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                            placeholder="이름" required/>
                     <label htmlFor="name" className="form-label">이름</label>
+                    {errors.name && <div className="invalid-feedback">{errors.name}</div>}
                 </div>
 
                 <div className="form-floating my-2">
-                    <input type="email" name="email" id="email" className="form-control"
+                    <input type="email" name="email" id="email"
+                           className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                            placeholder="이메일" required/>
                     <label htmlFor="email" className="form-label">이메일</label>
-
+                    {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                 </div>
 
                 <div className="my-2 d-flex justify-content-center">
@@ -44,7 +123,7 @@ const Join = () => {
 
                 <div className="my-2 d-flex justify-content-between">
                     <button type="submit" className="btn btn-primary">
-                        <i className="fas fa-solid fa-file-signature"></i> 입력완료
+                        <i className="fa-sharp fa-solid fa-file-signature"></i> 입력완료
                     </button>
                     <button type="reset" className="btn btn-danger">
                         <i className="fa-sharp fa-solid fa-eraser"></i> 다시입력
