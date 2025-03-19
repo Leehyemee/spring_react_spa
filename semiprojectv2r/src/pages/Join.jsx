@@ -6,7 +6,35 @@ import {atomtest} from "globals";
 const resetForm = (formJoinRef, setErrors) => {
     formJoinRef.current.reset();
     setErrors({});
-}
+};
+
+// 회원가입 처리 함수
+const processJoinok = async (formValues) => {
+    // Web Crypto API로 비밀번호 암호화
+    // formValues.password = await hashPassword(formValues.password);
+    // console.log(formValues.password);
+
+    fetch('htto://localhost:8080/api/auch/signup', {    // 레스트풀 형식??
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues) // 데이터를 JSON 문자열로 변환
+    }).then(async response => {
+        if (response.ok) {  // 회원가입이 정상적으로 처리되었다면
+            alert('회원가입이 완료되었습니다!!');
+            location.href = '/member/login';
+        } else if (response.status === 400) {
+            alert(await response.text());
+        }else {     // 회원가입이 실패했다면
+            alert('회원가입에 실패했습니다!! 다시 시도 해주세요!');
+        }
+
+    }) .catch(error => {
+        console.error('join error:', error);
+        alert('서버와 통신중 오류가 발생했습니다!! 관리자에게 문의하세요!');
+    });
+};
 
 // Join 함수 컴포넌트 정의
 const Join = () => {
@@ -35,6 +63,8 @@ const Join = () => {
         // 유효성 검사 후 오류가 하나라도 없다면?
         if (Object.keys(formErrors).length === 0) {
             console.log('입력한 회원 정보 : ', formValues);
+            // 회원가입 처리 API 호출
+            processJoinok(formValues);
         } else { // 오류가 하나라도 존재한다면?
             setErrors(formErrors);
             console.log("'오류 정보 : '", formErrors);
