@@ -1,6 +1,31 @@
 import React, {useRef, useState} from "react";
 import "../styles/member.css"
 
+// 폼 재설정 함수
+
+// 암호화 함수
+
+// 로그인 처리 함수
+const processLoginok = async (values) => {
+    fetch("http://localhost:8080/api/auth/signin", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values),
+    }).then(async response => {
+        if (response.ok) {
+            alert('로그인 성공!!');
+            location.href="/member/myinfo";
+        } else if (response.status === 400) {
+            alert(await response.text());
+        }
+    }).catch(error => {
+        console.log(error);
+        alert('서버와 통신하는 중 오류가 발생했습니다!!');
+    });
+};
+
 // Login 함수 컴포넌트 정의
 const Login = () => {
     // 폼 처리 관련 변수 선언
