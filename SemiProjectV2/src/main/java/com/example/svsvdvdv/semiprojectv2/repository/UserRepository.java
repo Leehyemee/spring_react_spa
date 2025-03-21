@@ -1,6 +1,6 @@
 package com.example.svsvdvdv.semiprojectv2.repository;
 
-
+//
 import com.example.svsvdvdv.semiprojectv2.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
