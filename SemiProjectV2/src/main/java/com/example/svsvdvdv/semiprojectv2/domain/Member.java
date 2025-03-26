@@ -11,7 +11,7 @@ public class Member {
 
     private int mno;
     private String userid;
-    private String passwd;
+    private String userpwd;
     private String name;
     private String email;
     private LocalDateTime regdate;

@@ -1,12 +1,11 @@
 package com.example.svsvdvdv.semiprojectv2.controller;
 
-import com.example.svsvdvdv.semiprojectv2.domain.Member;
-import com.example.svsvdvdv.semiprojectv2.domain.MemberDTO;
 import com.example.svsvdvdv.semiprojectv2.domain.User;
 import com.example.svsvdvdv.semiprojectv2.service.MemberService;
 import com.example.svsvdvdv.semiprojectv2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.example.svsvdvdv.semiprojectv2.service;
 
 
-import org.apache.catalina.User;
+import com.example.svsvdvdv.semiprojectv2.domain.User;
 
 public interface UserService {
 

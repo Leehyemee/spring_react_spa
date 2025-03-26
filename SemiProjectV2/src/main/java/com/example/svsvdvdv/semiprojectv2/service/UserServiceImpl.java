@@ -1,8 +1,8 @@
 package com.example.svsvdvdv.semiprojectv2.service;
 
+import com.example.svsvdvdv.semiprojectv2.domain.User;
 import com.example.svsvdvdv.semiprojectv2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 @Service

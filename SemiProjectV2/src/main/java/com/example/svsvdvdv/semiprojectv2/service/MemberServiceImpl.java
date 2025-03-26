@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
     public Member loginMember(MemberDTO member) {
         Member findMember = memberMapper.findByUserid(member.getUserid());
 
-        if (findMember == null || !findMember.getPasswd().equals(member.getPasswd())) {
+        if (findMember == null || !findMember.getUserpwd().equals(member.getUserpwd())) {
             throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다!!");
         }
 
