@@ -1,8 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "../styles/board.css"
 
 // BoardList 함수 컴포넌트 정의
 const BoardList = () => {
+
+    useEffect(() => {
+        fetch('http://localhost:5000/boards')
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
+    }, []);
+
+
+    const goBoardWrite = () => {
+        location.href = '/board/write';
+    };
+
     return (
         <main id="content">
             <h2>게시판</h2>
@@ -33,7 +46,8 @@ const BoardList = () => {
                         </div>
                     </td>
                     <td colSpan="3" className="text-end">
-                        <button type="button" className="btn btn-primary" id="newbdbtn">
+                        <button type="button" className="btn btn-primary"
+                                id="newbdbtn" onClick={goBoardWrite}>
                             <i className="fas fa-pen" /> 글쓰기
                         </button>
                     </td>
