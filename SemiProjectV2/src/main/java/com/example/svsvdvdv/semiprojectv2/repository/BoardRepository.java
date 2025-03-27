@@ -18,4 +18,11 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     // 위 내용을 아래 한줄로 바꿈(jpa에 맞게)
 
     Page<BoardDTO> findBy(Pageable pageable);
+
+    Page<BoardDTO> findByTitleContains(Pageable pageable, String findkey);
+    Page<BoardDTO> findByUseridContains(Pageable pageable, String findkey);
+    Page<BoardDTO> findByContentsContains(Pageable pageable, String findkey);
+
+    Page<BoardDTO> findByTitleContainsOrContentsContains(Pageable pageable, String fkey1, String fkey2);
+
 }
