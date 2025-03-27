@@ -41,7 +41,7 @@ public class BoardController {
     // http://localhost:8080/api/board/list?cpg=4 아래로 변경(/list -> /list/{cpg} , RequestParam -> PathVariable)
     // http://localhost:8080/api/board/list/4
     @GetMapping("/list/{cpg}")
-    public ResponseEntity<?> list(@PathVariable int cpg) {
+    public ResponseEntity<?> list(@PathVariable int cpg) {      // java에서 PathVariable === /:cpg
         BoardListDTO boardListDTO = boardService.readBoard(cpg);
 
         return new ResponseEntity<>(boardListDTO, HttpStatus.OK);
