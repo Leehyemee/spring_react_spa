@@ -26,36 +26,49 @@ const BoardView = () => {
     return (
         <main id="content">
             <h2>게시판 본문글</h2>
-            <div class="row offset-1 col-10 my-3">
-                <table class="table">
+            <div className="row offset-1 col-10 my-3">
+                <table className="table">
                     <thead><tr><td>
-                        <button type="button" class="btn btn-light">
+                        <button type="button" className="btn btn-light">
                             이전게시물</button>
                         &nbsp;
-                        <button type="button" class="btn btn-light">
+                        <button type="button" className="btn btn-light">
                             다음게시물</button></td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-primary" id="newbdbtn">
+                        <td className="text-end">
+                            <button type="button" className="btn btn-primary" id="newbdbtn">
                                 새글쓰기</button></td>
                     </tr>
                     </thead>
-                    <tbody id="boardView">
+                    <tbody>
+                    {
+                        (!boardData.bd) ?
+                        <tr>
+                            <td colSpan="3">본문글이 없어요!!</td>
+                        </tr>
+                        :
+                        <>
+                        <tr><th className="vtit" colSpan="2">{boardData.bd.title}</th></tr>
+                        <tr><td className="vinfo">{boardData.bd.userid}</td>
+                            <td className="text-end vinfo">{boardData.bd.regdate}/ {boardData.bd.thumbs} / {boardData.bd.views}</td>
+                        </tr>
+                        <tr><td className="vcont pre" colSpan="2">{boardData.bd.contents}</td></tr></>
+                    }
 
                     </tbody>
                     <tfoot><tr><td>
-                        <button type="button" class="btn btn-warning">
+                        <button type="button" className="btn btn-warning">
                             수정하기</button>
                         &nbsp;
-                        <button type="button" class="btn btn-danger" id="rmvbdbtn">
+                        <button type="button" className="btn btn-danger" id="rmvbdbtn">
                             삭제하기</button></td>
-                        <td class="text-end"><button type="button" class="btn btn-light" id="lstbdbtn">
+                        <td className="text-end"><button type="button" className="btn btn-light" id="lstbdbtn">
                             목록으로</button></td>
                     </tr>
                     </tfoot>
                 </table>
 
-                <div class="my-3">
-                    <h3><i class="fa fa-commenting"></i> 나도 한마디</h3>
+                <div className="my-3">
+                    <h3><i className="fa fa-commenting"></i> 나도 한마디</h3>
                 </div>
             </div>
         </main>
