@@ -25,4 +25,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Page<BoardDTO> findByTitleContainsOrContentsContains(Pageable pageable, String fkey1, String fkey2);
 
+    Board findByBno(Long bno);
 }
