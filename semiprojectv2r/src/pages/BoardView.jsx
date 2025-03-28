@@ -97,7 +97,7 @@ const BoardView = () => {
                     {
                         (boardData.rps) && boardData.rps.map((rp) => (
                             (rp.rno === rp.ref) ?
-                                <tr key={`reply-${rp.rno}`}>
+                                (<tr key={`reply-${rp.rno}`}>
                                     <td className="text-left">{rp.userid}</td>
                                     <td>
                                         <div className="cmtbg"><span>{rp.regdate}</span>`;
@@ -105,9 +105,14 @@ const BoardView = () => {
                                                  data-bs-toggle="modal" data-bs-target="#cmtModal">[추가]</a> [수정] [삭제]</span>
                                         </div><p className="py-1 pre">{rp.comments}</p>
                                     </td>
-                                </tr>
+                                </tr>)
                                 :
-                                ''
+                                (<tr key={`reply-${rp.rno}`}>
+                                    <td className="text-left">&nbsp;</td>
+                                    <td><div className="rpybg"><span>{rp.userid}</span>
+                                            <span className="pushend">{rp.regdate}</span></div>
+                                        <p className="py-1 pre">{rp.comments}</p></td>
+                                </tr>)
                         ))
                     }
                     </tbody>
