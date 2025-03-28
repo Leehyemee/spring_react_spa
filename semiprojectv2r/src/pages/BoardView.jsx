@@ -102,14 +102,17 @@ const BoardView = () => {
                                     <td>
                                         <div className="cmtbg"><span>{rp.regdate}</span>`;
                                             <span className="pushend"><a href="#" data-ref={`${rp.rno}`}
-                                                 data-bs-toggle="modal" data-bs-target="#cmtModal">[추가]</a> [수정] [삭제]</span>
-                                        </div><p className="py-1 pre">{rp.comments}</p>
+                                                                         data-bs-toggle="modal"
+                                                                         data-bs-target="#cmtModal">[추가]</a> [수정] [삭제]</span>
+                                        </div>
+                                        <p className="py-1 pre">{rp.comments}</p>
                                     </td>
                                 </tr>)
                                 :
                                 (<tr key={`reply-${rp.rno}`}>
                                     <td className="text-left">&nbsp;</td>
-                                    <td><div className="rpybg"><span>{rp.userid}</span>
+                                    <td>
+                                        <div className="rpybg"><span>{rp.userid}</span>
                                             <span className="pushend">{rp.regdate}</span></div>
                                         <p className="py-1 pre">{rp.comments}</p></td>
                                 </tr>)
@@ -118,6 +121,55 @@ const BoardView = () => {
                     </tbody>
                 </table>
 
+                <div className="py-3">
+                    <form className="card card-body bg-light" method="post"
+                          name="replyfrm" id="replyfrm">
+                        <div className="row align-items-center">
+                            <div className="col text-center"><label
+                                th:text="${#authentication.principal.username}"></label></div>
+
+                            <div className="col-8"><textarea id="comments" rows="10" name="comments"
+                                                             className="form-control col-7"></textarea></div>
+
+                            <div className="col">
+                                <button type="button" id="replybtn"
+                                        className="btn btn-dark">
+                                    <i className="fa fa-commenting"></i> 댓글쓰기
+                                </button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input type="hidden" name="userid" value="abc123"/>
+                        <input type="hidden" name="pno" value={bno}/>
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div className="modal hide" id="cmtModal" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h3 className="modal-title">대댓글 쓰기</h3>
+                        </div>
+                        <div className="modal-body">
+                            <form name="cmmtfrm" id="cmmtfrm" method="post">
+                                <textarea name="comments" id="cmmt" rows="8" cols="60"
+                                          className="span4"></textarea>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <input type="hidden" name="userid" value="abc123"/>
+                                <input type="hidden" name="pno" value={bno} />
+                                <input type="hidden" name="ref" id="refno" />
+                            </form>
+                        </div>
+                        <div className="modal-footer justify-content-center">
+                            <button type="button" id="cmmtbtn"
+                                    className="btn btn-danger">대댓글 작성
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     )
