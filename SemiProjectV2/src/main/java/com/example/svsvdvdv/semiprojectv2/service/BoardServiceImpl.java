@@ -71,9 +71,20 @@ public class BoardServiceImpl implements BoardService {
     public BoardReplyDTO readOneBoardReply(Long bno) {
         boardRepository.updateViews(bno);
         Board board = boardRepository.findByBno(bno);
-        List<Reply> replies = replyRepository.findByPnoOrderByRef(bno);
+        //List<Reply> replies = replyRepository.findByPnoOrderByRef(bno);
 
-        return new BoardReplyDTO(board, replies);
+        //return new BoardReplyDTO(board, replies);
+        return new BoardReplyDTO(board, board.getReplies());
     }
+
+    @Override
+    public BoardReplyDTO readOneBoardWithReply(Long bno) {
+        //Board boardreply = boardRepository.findByBnoWithReply(bno);
+        Board boardreply = boardRepository.findByBno(bno);
+
+        return new BoardReplyDTO(boardreply, boardreply.getReplies());
+    }
+
+
 
 }
