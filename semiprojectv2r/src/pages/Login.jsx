@@ -46,6 +46,7 @@ const Login = () => {
         // 유효성 검사 결과에 따라 개별 처리
         if (Object.keys(formErrors).length === 0) {
             console.log('로그인 요청데이터 : ', formValues);
+            processLoginok(formValues);
         } else {
             setErrors(formErrors);
             console.log(formErrors);
