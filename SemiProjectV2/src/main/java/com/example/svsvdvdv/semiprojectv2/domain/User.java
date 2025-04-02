@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="users2")
+@Table(name="users3")
 @Data @Builder
 @AllArgsConstructor
 @NoArgsConstructor
