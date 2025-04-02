@@ -2,7 +2,6 @@ package com.example.svsvdvdv.semiprojectv2.controller;
 
 import com.example.svsvdvdv.semiprojectv2.domain.User;
 import com.example.svsvdvdv.semiprojectv2.jwt.JwtTokenProvider;
-import com.example.svsvdvdv.semiprojectv2.service.MemberService;
 import com.example.svsvdvdv.semiprojectv2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 // 교차 출처 리소스 공유 CORS
@@ -67,7 +65,7 @@ public class AuthController {
 
             // 생성한 토큰을 JSON 형식으로 만듦
             Map<String, String> tokens = Map.of(
-                    "accessToKen", jwt
+                    "accessToken", jwt
             );
             response = ResponseEntity.ok().body(tokens);
         } catch (BadCredentialsException e) {

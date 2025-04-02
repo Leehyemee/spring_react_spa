@@ -126,19 +126,19 @@ const Join = () => {
                 </div>
 
                 <div className="form-floating my-2">
-                    <input type="password" name="password" id="password"
-                           className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                    <input type="password" name="userpwd" id="userpwd"
+                           className={`form-control ${errors.userpwd ? 'is-invalid' : ''}`}
                            placeholder="비밀번호" required minLength="6" maxLength="18"/>
-                    <label htmlFor="passwd" className="form-label">비밀번호</label>
-                    {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+                    <label htmlFor="userpwd" className="form-label">비밀번호</label>
+                    {errors.userpwd && <div className="invalid-feedback">{errors.userpwd}</div>}
                 </div>
 
                 <div className="form-floating my-2">
-                    <input type="password" name="repassword" id="repassword"
-                           className={`form-control ${errors.repassword ? 'is-invalid' : ''}`}
+                    <input type="password" name="reuserpwd" id="reuserpwd"
+                           className={`form-control ${errors.reuserpwd ? 'is-invalid' : ''}`}
                            placeholder="비밀번호 확인" required minLength="6" maxLength="18"/>
-                    <label htmlFor="repasswd" className="form-label">비밀번호 확인</label>
-                    {errors.repassword && <div className="invalid-feedback">{errors.repassword}</div>}
+                    <label htmlFor="reuserpwd" className="form-label">비밀번호 확인</label>
+                    {errors.reuserpwd && <div className="invalid-feedback">{errors.reuserpwd}</div>}
                 </div>
 
                 <div className="form-floating my-2">

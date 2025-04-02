@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .csrf().disable() // CSRF 필터 끔
                 //.userDetailsService(userDetailsService) // userDetailsService 설정
                 .authorizeRequests() // URL 기반 인가 설정
-                .antMatchers("/", "/api/auth/**", "/gallery/**", "/api/board/**").permitAll() // 인증/인가 여부와 상관없이 접근 가능
+                .antMatchers("/", "/api/auth/**", "/gallery/**", "/api/board/**", "/api/member/**").permitAll() // 인증/인가 여부와 상관없이 접근 가능
             .and()
 //                .formLogin()  // form login 인증 사용
 //                    .loginPage("/member/login") // 커스텀 로그인 페이지 경로

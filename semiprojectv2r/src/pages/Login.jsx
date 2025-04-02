@@ -15,9 +15,19 @@ const processLoginok = async (values) => {
         body: JSON.stringify(values),
     }).then(async response => {
         if (response.ok) {
-            alert('로그인 성공!!');
-            location.href="/member/myinfo";
-        } else if (response.status === 400) {
+            const data = await response.json();
+            console.log(data);
+
+            if (data.accessToken) { // JWT 토큰이 존재하면
+                localStorage.setItem("accessToken", data.accessToken);
+                alert('로그인 성공!!');
+                location.href="/member/myinfo";
+            } else {
+                alert('다시 로그인 하세요!!');
+                location.href="/member/login";
+            }
+
+        } else if (response.status === 401) {
             alert(await response.text());
         }
     }).catch(error => {
@@ -65,10 +75,10 @@ const Login = () => {
         }
 
         // 비밀번호 검사
-        if (!values.passwd) {
-            formErrors.passwd = '비밀번호를 입력하세요!!';
-        } else if (values.passwd.length < 6) {
-            formErrors.passwd = '비밀번호는 6자 이상이어야 합니다!!';
+        if (!values.userpwd) {
+            formErrors.userpwd = '비밀번호를 입력하세요!!';
+        } else if (values.userpwd.length < 6) {
+            formErrors.userpwd = '비밀번호는 6자 이상이어야 합니다!!';
         }
 
         return formErrors;
@@ -88,11 +98,11 @@ const Login = () => {
                 </div>
 
                 <div className="form-floating my-2">
-                    <input type="password" name="passwd" id="passwd"
-                           className={`form-control ${errors.passwd ? 'is-invalid' : ''}`}
+                    <input type="password" name="userpwd" id="userpwd"
+                           className={`form-control ${errors.userpwd ? 'is-invalid' : ''}`}
                            required placeholder="비밀번호"/>
-                    <label htmlFor="passwd" className="form-label">비밀번호</label>
-                    {errors.passwd && <div className="invalid-feedback">{errors.passwd}</div>}
+                    <label htmlFor="userpwd" className="form-label">비밀번호</label>
+                    {errors.userpwd && <div className="invalid-feedback">{errors.userpwd}</div>}
                 </div>
 
                 <div className="my-2 d-flex justify-content-center">
