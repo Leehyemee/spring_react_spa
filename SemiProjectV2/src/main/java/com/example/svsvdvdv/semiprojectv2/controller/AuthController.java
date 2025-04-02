@@ -35,7 +35,7 @@ public class AuthController {
         log.info("submit된 회원 정보 : {}", user);
 
         try {
-            // 정상 처리시 상태코드 200으로 응답
+            // 정상 처리시 상태코드 200으로 응답;;
             userService.newUser(user);
             response = ResponseEntity.ok().build();
         } catch (IllegalStateException e) {
