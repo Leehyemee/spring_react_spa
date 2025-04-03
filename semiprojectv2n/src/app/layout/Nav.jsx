@@ -1,11 +1,25 @@
-import React from "react";
+'use client'
+
+import React, {useContext} from "react";
+import {AuthContext} from "@/contexts/AuthContext";
 
 // Nav 함수 컴포넌트 정의
 const Nav = () => {
+    const {login} = useContext(AuthContext);
+    console.log(">> Nav ", login);
+
     return (
         <nav role="navigation" className="navbar navbar-light bg-light">
             <ul className="nav space-between">
                 <li className="nav-item"><a href="/" className="nav-link">Home</a></li>
+
+                { login ?
+                    (<><li className="nav-item"><a href="#" className="nav-link">회원가입</a></li>
+                        <li className="nav-item"><a href="/member/logout" className="nav-link">로그아웃</a></li></>)
+                    :
+                    (<><li className="nav-item"><a href="/member/join" className="nav-link">회원가입</a></li>
+                        <li className="nav-item"><a href="/member/login" className="nav-link">로그인</a></li></>)
+                }
 
                 <li className="nav-item" >
                     <a href="/member/join" className="nav-link">회원가입</a></li>
