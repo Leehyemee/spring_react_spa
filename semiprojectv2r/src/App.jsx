@@ -24,6 +24,7 @@ function App() {
                 <Route path="" element={<Main />} />
                 <Route path="/member/join" element={<Join />} />
                 <Route path="/member/login" element={<Login />} />
+                <Route path="/member/logout" element={<Logout />} />
                 <Route path="/board/list/:cpg" element={<BoardList />} />        {/*react에서 PathVariable === /:cpg*/}
                 <Route path="/board/find/:ftype/:fkey/:cpg" element={<BoardList />} />
                 <Route path="/board/write" element={<BoardWrite />} />
