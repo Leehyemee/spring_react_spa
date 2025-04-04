@@ -6,6 +6,7 @@ import Footer from "./pages/layout/Footer";
 import Main from "./pages/Main";
 import Join from "./pages/Join";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Myinfo from "./pages/Myinfo";
 import BoardList from "./pages/BoardList";
 import BoardWrite from "./pages/BoardWrite";
@@ -25,11 +26,11 @@ function App() {
                 <Route path="/member/join" element={<Join />} />
                 <Route path="/member/login" element={<Login />} />
                 <Route path="/member/logout" element={<Logout />} />
-                <Route path="/board/list/:cpg" element={<BoardList />} />        {/*react에서 PathVariable === /:cpg*/}
+                <Route path="/board/list/:cpg" element={<BoardList />} />     {/*react에서 PathVariable === /:cpg*/}
                 <Route path="/board/find/:ftype/:fkey/:cpg" element={<BoardList />} />
                 <Route path="/board/write" element={<BoardWrite />} />
                 <Route path="/board/view/:bno" element={<BoardView/>} />
-                {/*<Route path="/gallery/list" element={<GalleryList />} />*/}
+                {/*<Route path="/gallery/list" element={<GalleryList />}*/}
                 <Route path="/member/myinfo" element={<Myinfo />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
