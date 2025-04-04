@@ -1,5 +1,6 @@
 package com.example.svsvdvdv.semiprojectv2.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,5 +37,9 @@ public class User {
     @CreationTimestamp
     //@Column(insertable = false, updatable = false)
     private LocalDateTime regdate;
+
+    @Transient  // 엔티티 컬럼과 무관한 변수로 선언. **테이블의 컬럼과 상관없는 dto 형태
+    @JsonProperty("g-recaptcha-response")
+    private String gRecaptchaResponse;
 
 }
