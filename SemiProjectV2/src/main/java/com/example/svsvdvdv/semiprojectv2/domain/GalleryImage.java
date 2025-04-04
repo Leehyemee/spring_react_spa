@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name="gallerys3")
+@Table(name="gallery_images3")
 @Data @Builder
 @AllArgsConstructor
 @NoArgsConstructor

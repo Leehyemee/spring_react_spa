@@ -32,10 +32,9 @@ const validateGalleryForm = (values) => {
 };
 
 const processGalleryok = async (formValues) => {
-    fetch('http://localhost:8080/api/Gallery/write', {
+    fetch('http://localhost:8080/api/gallery/write', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formValues)
+        body: formValues
     }).then(async response => {
         if (response.ok) {
             alert('글쓰기가 완료되었습니다!!');
@@ -67,7 +66,17 @@ const GalleryWrite = () => {
         const formErrors = validateGalleryForm(formValues);
 
         if (Object.keys(formErrors).length === 0) {
-            processGalleryok(formValues);
+
+            // cowmeat01.jpg => cowmeat_small.jpg
+            const fname = formData.getAll("ginames")[0].name.split('.');
+            const tfname = `${fname[0]}_small.${fname[1]}`;
+            //console.log(">> tfname ", fname, tfname);
+            formData.set("simgname", tfname); // 요소명, 값
+
+            //console.log(">> formData", formData);
+            //console.log(">> formValues", formValues);
+
+            processGalleryok(formData);
         } else {
             setErrors(formErrors);
             console.log('갤러리 글쓰기 실패!!');
