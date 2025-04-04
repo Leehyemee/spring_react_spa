@@ -56,7 +56,8 @@ const Join = () => {
         // FormData API를 사용해서 폼 데이터 수집
         const formData = new FormData(formJoinRef.current);
         const formValues = Object.fromEntries(formData.entries());
-        
+        console.log(">> join ", formValues["g-recaptcha-response"]);
+
         // 전체 폼 유효성 검사
         const formErrors = validateJoinForm(formValues);
 
@@ -84,17 +85,17 @@ const Join = () => {
         }
 
         // 비밀번호 검사
-        if (!values.password) {
-            formErrors.password = "비밀번호를 입력하세요!!";
-        } else if (values.password.length < 6) {
-            formErrors.password = "비밀번호는 6자 이상이어야 합니다!!";
+        if (!values.userpwd) {
+            formErrors.userpwd = "비밀번호를 입력하세요!!";
+        } else if (values.userpwd.length < 6) {
+            formErrors.userpwd = "비밀번호는 6자 이상이어야 합니다!!";
         }
 
         // 비밀번호 확인 검사
-        if (!values.repassword) {
-            formErrors.repassword = "비밀번호를 확인을 입력하세요!!";
-        } else if (values.password !== values.repassword) {
-            formErrors.repassword = "비밀번호는 6자 이상이어야 합니다!!";
+        if (!values.reuserpwd) {
+            formErrors.reuserpwd = "비밀번호를 확인을 입력하세요!!";
+        } else if (values.reuserpwd !== values.reuserpwd) {
+            formErrors.reuserpwd = "비밀번호는 6자 이상이어야 합니다!!";
         }
 
         // 이름 확인 검사
@@ -107,6 +108,11 @@ const Join = () => {
             formErrors.email = "이메일을 입력하세요!!";
         } else if (!/\S+@\S+\.\S+/.test(values.email)) {
             formErrors.email = "유효한 이메일 주소를 입력하세요!!";
+        }
+
+        // 리캡챠 확인 검사
+        if (!values["g-recaptcha-response"]) {  /*.(dot) 연산자는 배열형식으로 바꿔 쓸 수 있음*/
+            formErrors.recaptcha = "자동가입방지를 확인하세요!!";
         }
 
         return formErrors;
@@ -173,6 +179,7 @@ const Join = () => {
                 <div className="my-2 d-flex justify-content-center">
                     <div className="g-recaptcha" data-sitekey={sitekey}></div>
                 </div>
+                {errors.recaptcha && <div className="alert alert-danger">{errors.recaptcha}</div>}
 
                 <div className="my-2 d-flex justify-content-between">
                     <button type="submit" className="btn btn-primary">
