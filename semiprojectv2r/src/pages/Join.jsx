@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../styles/member.css";
 
 // 폼 재설정 함수 - 외부로 빼냄
@@ -44,6 +44,7 @@ const Join = () => {
     // errors : 상태를 저장하기 위한 변수
     // setErrors : errors 변수의 상태를 변경하는 함
     const [errors, setErrors] = useState({});
+    const [sitekey, setSitekey] = useState(null);
 
     // 폼 재설정 처리
     const handleReset = () => resetForm(formJoinRef, setErrors);
@@ -111,6 +112,18 @@ const Join = () => {
         return formErrors;
     };
 
+    // recpatcaha 모듈 적재
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://www.google.com/recaptcha/api.js';
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+
+        const site_key = import.meta.env.VITE_APP_RECAPTCHA_SITEKEY;
+        setSitekey(site_key);
+    }, []);
+
     return (
         <main id="content">
             <h2>회원가입</h2>
@@ -158,7 +171,7 @@ const Join = () => {
                 </div>
 
                 <div className="my-2 d-flex justify-content-center">
-                    <img src="/image/captcha.png"/>
+                    <div className="g-recaptcha" data-sitekey={sitekey}></div>
                 </div>
 
                 <div className="my-2 d-flex justify-content-between">
