@@ -1,16 +1,17 @@
 package com.example.svsvdvdv.semiprojectv2.controller;
 
 import com.example.svsvdvdv.semiprojectv2.domain.Pds;
+import com.example.svsvdvdv.semiprojectv2.domain.PdsReply;
+import com.example.svsvdvdv.semiprojectv2.domain.PdsReplyDTO;
 import com.example.svsvdvdv.semiprojectv2.service.PdsService;
 import com.example.svsvdvdv.semiprojectv2.utils.GoogleRecaptchaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -48,14 +49,14 @@ public class PdsController {
     RESTful API 설계에서 자원의 식별자로 사용하기에 적합
     */
 
-    // list에서 /gallery/view/글번호(경로 변수) 쓰려면 아래처럼 중괄호 안에 넣어줘야함.
-//    @GetMapping("/view/{gno}")
-//    public String view(Model m, @PathVariable int gno) {
-//
-//        m.addAttribute("galgi", galleryService.readOneGalleryImage(gno));
-//
-//        return "views/gallery/view";
-//    }
+    // list에서 /pds/view/글번호(경로 변수) 쓰려면 아래처럼 중괄호 안에 넣어줘야함.
+    @GetMapping("/view/{pno}")
+    public ResponseEntity<?> view(Model m, @PathVariable int pno) {
+
+        PdsReplyDTO rdsreply = pdsService.readOnePdsReply(pno);
+
+        return new ResponseEntity<>(rdsreply, HttpStatus.OK);
+    }
 
 
     @PostMapping("/write")

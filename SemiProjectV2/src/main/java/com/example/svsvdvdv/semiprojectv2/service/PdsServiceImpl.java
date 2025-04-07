@@ -2,6 +2,7 @@ package com.example.svsvdvdv.semiprojectv2.service;
 
 import com.example.svsvdvdv.semiprojectv2.domain.Pds;
 import com.example.svsvdvdv.semiprojectv2.domain.PdsAttach;
+import com.example.svsvdvdv.semiprojectv2.domain.PdsReply;
 import com.example.svsvdvdv.semiprojectv2.domain.PdsReplyDTO;
 import com.example.svsvdvdv.semiprojectv2.repository.*;
 import com.example.svsvdvdv.semiprojectv2.utils.PdsUploadService;
@@ -81,9 +82,15 @@ public class PdsServiceImpl implements PdsService {
         return result;
     }
 
+    @Transactional
     @Override
     public PdsReplyDTO readOnePdsReply(int pno) {
-        return null;
+        //PdsMapper.updateView(pno);  // 조회수 증가 -- 나중에 해보기
+        Pds pds = pdsMapper.findByPno(pno);
+        List<PdsAttach> pas = pdsAttachMapper.findByPno(pno);
+        List<PdsReply> prs = pdsReplyMapper.findByPno(pno);
+
+        return new PdsReplyDTO(pds, pas, prs);
     }
 
 }
