@@ -40,6 +40,10 @@ const BoardList = () => {
         location.href = '/board/write';
     };
 
+    const goPdsWrite = () => {
+        location.href = '/pds/write';
+    };
+
     const goBoardFind = () => {
         const findtype = ftypeRef.current.value;
         const findkey = fkeyRef.current.value;
@@ -80,6 +84,10 @@ const BoardList = () => {
                         <button type="button" className="btn btn-primary"
                                 id="newbdbtn" onClick={goBoardWrite}>
                             <i className="fas fa-pen" /> 글쓰기
+                        </button>&nbsp;
+                        <button type="button" className="btn btn-primary"
+                                id="newpdstn" onClick={goPdsWrite}>
+                            <i className="fas fa-pen" /> 자료실 글쓰기
                         </button>
                     </td>
                 </tr>
