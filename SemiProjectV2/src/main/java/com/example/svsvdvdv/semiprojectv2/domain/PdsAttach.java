@@ -18,6 +18,9 @@ public class PdsAttach {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pano;
 
+//    @Column(nullable = false)
+//    private String uuid;
+
     @Column(nullable = false)
     private String pafname;
 
