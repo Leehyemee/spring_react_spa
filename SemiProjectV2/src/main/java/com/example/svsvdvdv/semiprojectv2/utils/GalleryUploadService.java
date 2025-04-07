@@ -1,4 +1,4 @@
-package com.example.svsvdvdv.semiprojectv2.service;
+package com.example.svsvdvdv.semiprojectv2.utils;
 
 import com.example.svsvdvdv.semiprojectv2.domain.GalleryImage;
 import lombok.extern.slf4j.Slf4j;

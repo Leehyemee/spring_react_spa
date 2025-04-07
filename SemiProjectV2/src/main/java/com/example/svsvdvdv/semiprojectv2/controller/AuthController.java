@@ -2,7 +2,7 @@ package com.example.svsvdvdv.semiprojectv2.controller;
 
 import com.example.svsvdvdv.semiprojectv2.domain.User;
 import com.example.svsvdvdv.semiprojectv2.jwt.JwtTokenProvider;
-import com.example.svsvdvdv.semiprojectv2.service.GoogleRecaptchaService;
+import com.example.svsvdvdv.semiprojectv2.utils.GoogleRecaptchaService;
 import com.example.svsvdvdv.semiprojectv2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
