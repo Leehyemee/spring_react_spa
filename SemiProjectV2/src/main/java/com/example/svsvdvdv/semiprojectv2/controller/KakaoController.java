@@ -1,9 +1,10 @@
 package com.example.svsvdvdv.semiprojectv2.controller;
 
+import com.example.svsvdvdv.semiprojectv2.domain.KakaoTokenResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,10 +45,41 @@ public class KakaoController {
         log.info("인가 코드: {}", code);
 
         // 2단계: 액세스토큰 요청
+        String authorizeUrl = "https://kauth.kakao.com/oauth/token";
+        String params = "?client_id=%s&redirect_uri=%s&code=%s&grant_type=authorization_code";
+        String kakaoUrl = String.format(authorizeUrl + params, clientId, redirectUri, code);
 
+        // HTTP 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        return null;
+        // HTTP 요청 엔티티 생성
+        HttpEntity<String> request = new HttpEntity<>(headers);
+
+        try {
+            // POST 요청으로 토큰 받기
+            ResponseEntity<KakaoTokenResponse> response = restTemplate.postForEntity(
+                    kakaoUrl,
+                    request,
+                    KakaoTokenResponse.class
+            );
+
+            // 응답에서 액세스토큰 추출
+            KakaoTokenResponse tokenResponse = response.getBody();
+            if (tokenResponse != null) {
+                String accessToken = tokenResponse.getAccess_token();
+                log.info("Access token: {}", accessToken);
+            }
+
+            return ResponseEntity.ok().body(tokenResponse);
+        } catch (Exception e) {
+            log.error("Error getting token: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error getting token: " + e.getMessage());
+        }
+
     }
 
-    // 카카오 로그아웃
-}
+        // 카카오 로그아웃
+    }
+
