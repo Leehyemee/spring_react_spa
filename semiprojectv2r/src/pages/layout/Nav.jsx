@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext.jsx";
 // Nav 함수 컴포넌트 정의
 const Nav = () => {
     const { login } = useContext(AuthContext);
+    const kakao = localStorage.getItem("kakao");
     console.log(">> Nav ", login);
 
     return (
